@@ -26,7 +26,7 @@ public class ApiBase {
                 .build();
     }
 
-    
+
     public Response getRequest(String endPoint, int responseCode) {
         Response response = RestAssured.given()
                 .spec(spec)
@@ -39,7 +39,7 @@ public class ApiBase {
         return response;
     }
 
-    public Response getRequestWithParam(String endPoint, int responseCode, String paramName, int value) {
+    public Response getRequestWithParam(String endPoint, int responseCode, String paramName, String value) {
         Response response = RestAssured.given()
                 .spec(spec)
                 .when()
@@ -79,11 +79,11 @@ public class ApiBase {
         return response;
     }
 
-    public Response deleteRequest(String endPoint, int responseCode, int value) {
+    public Response deleteRequest(String endPoint, int responseCode, String value) {
         Response response = RestAssured.given()
                 .spec(spec)
                 .when()
-                .pathParam("id", value)
+                .pathParam("UserId", value)
                 .log().all()
                 .delete(endPoint)
                 .then().log().all()

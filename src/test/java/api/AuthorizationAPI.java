@@ -1,6 +1,7 @@
 package api;
 
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.testng.Assert;
 import schemas.LoginViewModel;
 
@@ -25,4 +26,29 @@ public class AuthorizationAPI extends ApiBase {
         Assert.assertEquals(response.getString("result"), "User authorized successfully.", "Result should be 'Success'");
         return "Bearer " + response.getString("token");
     }
+
+    public Response login(String username) {
+        String endpoint = "/Account/v1/Login";
+        LoginViewModel userRequestBody = userBody(username);
+        return postRequest(endpoint, 200, userRequestBody);
+    }
+
+    public Response registerUser(String username) {
+        String endpoint = "/Account/v1/User";
+        LoginViewModel userRequestBody = userBody(username);
+        return postRequest(endpoint, 201, userRequestBody);
+    }
+
+    public boolean isAuthorized(String username) {
+        String endpoint = "/Account/v1/Authorized";
+        LoginViewModel userRequestBody = userBody(username);
+        return postRequest(endpoint, 200, userRequestBody).asString().equalsIgnoreCase("true");
+    }
+
+    public Response isDeleted(String username) {
+        String endpoint = "/Account/v1/Authorized";
+        LoginViewModel userRequestBody = userBody(username);
+        return postRequest(endpoint, 404, userRequestBody);
+    }
+
 }
