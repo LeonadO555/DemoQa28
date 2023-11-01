@@ -23,7 +23,7 @@ public class RegisterNewUserViaApi {
 
         // generate token
         String token = authorizationAPI.generateToken(expectedUsername);
-        boolean authorization = authorizationAPI.isAuthorized(expectedUsername);
+        boolean authorization = authorizationAPI.isAuthorized(expectedUsername, "j4RMm9B*L", 200);
 
         Assert.assertTrue(authorization, "User is not authorized, status: " + authorization);
 
