@@ -90,7 +90,7 @@ public class LoginUserViaApi {
         authorizationAPI.login(expectedUsername, 200, expectedPassword);
 
         //check with valid username and empty password
-        boolean authorization6 = authorizationAPI.isAuthorized(expectedUsername, "", 400);
+        boolean authorization6 = authorizationAPI.isAuthorized(expectedUsername, expectedPassword, 400);
         Assert.assertFalse(authorization6);
     }
 }
