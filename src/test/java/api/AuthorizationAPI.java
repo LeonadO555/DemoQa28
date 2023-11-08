@@ -11,7 +11,7 @@ public class AuthorizationAPI extends ApiBase {
     public LoginViewModel userBody(String username) {
         loginViewModel = new LoginViewModel();
         loginViewModel.setUsername(username);
-        loginViewModel.setPassword("j4RMm9B*L");
+        loginViewModel.setPassword("Alexgor0!");
         return loginViewModel;
     }
 
@@ -24,7 +24,7 @@ public class AuthorizationAPI extends ApiBase {
         return "Bearer " + response.getString("token");
     }
 
-    public Response login(String username) {
+    public Response login(String username, String password, int code) {
         String endpoint = "/Account/v1/Login";
         LoginViewModel userRequestBody = userBody(username);
         return postRequest(endpoint, 200, userRequestBody);
@@ -36,10 +36,20 @@ public class AuthorizationAPI extends ApiBase {
         return postRequest(endpoint, 201, userRequestBody);
     }
 
-    public boolean isAuthorized(String username) {
+   /* public boolean isAuthorized(String username, String s, int code) {
         String endpoint = "/Account/v1/Authorized";
         LoginViewModel userRequestBody = userBody(username);
         return postRequest(endpoint, 200, userRequestBody).asString().equals("true");
+    }*/
+   public boolean isAuthorizedUsername(String username,  int code) {
+       String endpoint = "/Account/v1/Authorized";
+       LoginViewModel userRequestBody = userBody(username);
+       return postRequest(endpoint, code, userRequestBody).asString().equalsIgnoreCase("true");
+   }
+    public boolean isAuthorizedPass( String password, int code) {
+        String endpoint = "/Account/v1/Authorized";
+        LoginViewModel userRequestBody = userBody(password);
+        return postRequest(endpoint, code, userRequestBody).asString().equalsIgnoreCase("true");
     }
 
     public Response isDeleted(String username) {
