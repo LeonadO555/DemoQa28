@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 public class RegisterNewUserViaApi {
 
     AuthorizationAPI authorizationAPI;
-
     UserAPI userAPI;
     Faker faker = new Faker();
 
@@ -26,8 +25,8 @@ public class RegisterNewUserViaApi {
 
         //generate token
         String token = authorizationAPI.generateToken(expectedUsername);
-        boolean authorization = authorizationAPI.isAuthorized(expectedUsername);
-        Assert.assertTrue(authorizationAPI.isAuthorized(expectedUsername), "User is not authorized, status : " + authorization);
+        boolean authorization = authorizationAPI.isAuthorized(expectedUsername, "j4RMm9B*L", 200);
+        Assert.assertTrue(authorizationAPI.isAuthorized(expectedUsername, "j4RMm9B*L", 200), "User is not authorized, status : " + authorization);
 
         // get data of created user
         userAPI = new UserAPI(token);
