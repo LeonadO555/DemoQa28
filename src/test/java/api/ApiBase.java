@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class ApiBase {
-    final String BASE_URI = "http://demoqa.com/";
+    final String BASE_URI = "https://demoqa.com/";
     private final RequestSpecification spec;
 
     public ApiBase() {
@@ -25,7 +25,7 @@ public class ApiBase {
                 .build();
     }
 
-    public Response getRequest(String endPoint, int responseCode) {
+    protected Response getRequest(String endPoint, int responseCode) {
         Response response = RestAssured.given()
                 .spec(spec)
                 .when()
@@ -37,7 +37,7 @@ public class ApiBase {
         return response;
     }
 
-    public Response getRequestWithParam(String endPoint, int responseCode, String paramName, int value) {
+    protected Response getRequestWithParam(String endPoint, int responseCode, String paramName, String value) {
         Response response = RestAssured.given()
                 .spec(spec)
                 .when()
@@ -50,7 +50,7 @@ public class ApiBase {
         return response;
     }
 
-    public Response postRequest(String endPoint, int responseCode, Object body) {
+    protected Response postRequest(String endPoint, int responseCode, Object body) {
         Response response = RestAssured.given()
                 .spec(spec)
                 .body(body)
@@ -63,7 +63,7 @@ public class ApiBase {
         return response;
     }
 
-    public Response putRequest(String endPoint, int responseCode, Object body) {
+    protected Response putRequest(String endPoint, int responseCode, Object body) {
         Response response = RestAssured.given()
                 .spec(spec)
                 .body(body)
@@ -76,11 +76,11 @@ public class ApiBase {
         return response;
     }
 
-    public Response deleteRequest(String endPoint, int responseCode, int value) {
+    protected Response deleteRequest(String endPoint, int responseCode, String value) {
         Response response = RestAssured.given()
                 .spec(spec)
                 .when()
-                .pathParam("id", value)
+                .pathParam("UserId", value)
                 .log().all()
                 .delete(endPoint)
                 .then().log().all()
