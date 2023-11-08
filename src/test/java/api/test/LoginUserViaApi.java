@@ -50,4 +50,6 @@ public class LoginUserViaApi {
         boolean authorizationEmptyFields = authorizationAPI.isAuthorized(username, password, 400);
         Assert.assertFalse(authorizationEmptyFields);
     }
+
+
 }
