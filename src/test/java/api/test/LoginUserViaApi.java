@@ -13,31 +13,41 @@ public class LoginUserViaApi {
 
     @Test
     public void successfulLoginUserViaApiTest() {
-        String userName = "Leonid";
+        String username = "Leonid";
         String password = "j4RMm9B*L";
         authorizationAPI = new AuthorizationAPI();
-        authorizationAPI.login(userName, password, 200);
-        boolean authorization = authorizationAPI.isAuthorized(userName, "j4RMm9B*L", 200);
+        authorizationAPI.login(username, password, 200);
+        boolean authorization = authorizationAPI.isAuthorized(username, "j4RMm9B*L", 200);
         Assert.assertTrue(authorization, "User is not authorized, status : " + authorization);
     }
 
     @Test
     public void invalidUsernameLoginUserViaApiTest() {
-        String userName = "Leonid*&^^51324335";
+        String username = "Leonid*&^^51324335";
         String password = "j4RMm9B*L";
         authorizationAPI = new AuthorizationAPI();
-        authorizationAPI.login(userName, password, 200);
-        boolean authorizationInvalidUser = authorizationAPI.isAuthorized(userName, password, 404);
+        authorizationAPI.login(username, password, 200);
+        boolean authorizationInvalidUser = authorizationAPI.isAuthorized(username, password, 404);
         Assert.assertFalse(authorizationInvalidUser);
     }
 
     @Test
     public void invalidPasswordLoginUserViaApiTest() {
-        String userName = "Leonid";
+        String username = "Leonid";
         String password = "123445678";
         authorizationAPI = new AuthorizationAPI();
-        authorizationAPI.login(userName, password, 200);
-        boolean authorizationInvalidPassword = authorizationAPI.isAuthorized(userName, password, 404);
+        authorizationAPI.login(username, password, 200);
+        boolean authorizationInvalidPassword = authorizationAPI.isAuthorized(username, password, 404);
         Assert.assertFalse(authorizationInvalidPassword);
+    }
+
+    @Test
+    public void emptyDataLoginUserViaApiTest() {
+        String username = "";
+        String password = "";
+        authorizationAPI = new AuthorizationAPI();
+        authorizationAPI.login(username, password, 200);
+        boolean authorizationEmptyFields = authorizationAPI.isAuthorized(username, password, 400);
+        Assert.assertFalse(authorizationEmptyFields);
     }
 }
