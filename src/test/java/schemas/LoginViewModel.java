@@ -10,14 +10,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+
 public class LoginViewModel {
+
     @JsonProperty("userName")
     private String userName;
 
     @JsonProperty("password")
     private String password;
 
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
 
@@ -25,7 +27,7 @@ public class LoginViewModel {
         return password;
     }
 
-    public void setUsername(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 

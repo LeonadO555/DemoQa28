@@ -23,8 +23,9 @@ public class RegisterNewUserViaApi {
 
         // generate token
         String token = authorizationAPI.generateToken(expectedUsername);
-        boolean authorization = authorizationAPI.isAuthorized(expectedUsername);
-        Assert.assertTrue(authorization, "User is not authorized, status: " + authorization);
+        boolean authorization = authorizationAPI.isAuthorized(expectedUsername, "j4RMm9B*L", 200);
+        Assert.assertTrue(authorizationAPI.isAuthorized(expectedUsername, "j4RMm9B*L", 200),
+                "User is not authorized, status : " + authorization);
 
         // get data of created user
         userAPI = new UserAPI(token);

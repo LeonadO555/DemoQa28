@@ -10,7 +10,7 @@ public class AuthorizationAPI extends ApiBase {
 
     public LoginViewModel userBody(String username, String password) {
         loginViewModel = new LoginViewModel();
-        loginViewModel.setUsername(username);
+        loginViewModel.setUserName(username);
         if (password != null) {
             loginViewModel.setPassword(password);
         } else {
@@ -40,10 +40,10 @@ public class AuthorizationAPI extends ApiBase {
         return postRequest(endpoint, 201, userRequestBody);
     }
 
-    public boolean isAuthorized(String username) {
+    public boolean isAuthorized(String username, String password, int code) {
         String endpoint = "/Account/v1/Authorized";
-        LoginViewModel userRequestBody = userBody(username, null);
-        return postRequest(endpoint, 200, userRequestBody).asString().equals("true");
+        LoginViewModel userRequestBody = userBody(username, password);
+        return postRequest(endpoint, code, userRequestBody).asString().equalsIgnoreCase("true");
     }
 
     public Response isDeleted(String username) {
