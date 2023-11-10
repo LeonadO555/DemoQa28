@@ -17,7 +17,7 @@ public class LoginUserViaApi {
         String password = "Alexgor0!";
         authorizationAPI = new AuthorizationAPI();
         authorizationAPI.login(username, password, 200);
-        boolean authorization = authorizationAPI.isAuthorizedUsername(username, 200);
+        boolean authorization = authorizationAPI.isAuthorized(username,password, 200);
         Assert.assertTrue(authorization, "User is not authorized, status : " + authorization);
     }
 
@@ -27,7 +27,7 @@ public class LoginUserViaApi {
         String password = "Alexgor0!";
         authorizationAPI = new AuthorizationAPI();
         authorizationAPI.login(username, password, 200);
-        boolean authorizationInvalidUser = authorizationAPI.isAuthorizedUsername(username, 404);
+        boolean authorizationInvalidUser = authorizationAPI.isAuthorized(username,password, 404);
         Assert.assertFalse(authorizationInvalidUser);
     }
 
@@ -37,7 +37,7 @@ public class LoginUserViaApi {
         String password = "123445678";
         authorizationAPI = new AuthorizationAPI();
         authorizationAPI.login(username, password, 200);
-        boolean authorizationInvalidPassword = authorizationAPI.isAuthorizedPass(password, 404);
+        boolean authorizationInvalidPassword = authorizationAPI.isAuthorized(username,password, 404);
         Assert.assertFalse(authorizationInvalidPassword);
     }
 
@@ -47,7 +47,7 @@ public class LoginUserViaApi {
         String password = "";
         authorizationAPI = new AuthorizationAPI();
         authorizationAPI.login(username, password, 200);
-        boolean authorizationEmptyFields = authorizationAPI.isAuthorizedUsername(username, 400);
+        boolean authorizationEmptyFields = authorizationAPI.isAuthorized(username,password, 400);
         Assert.assertFalse(authorizationEmptyFields);
     }
 

@@ -23,13 +23,14 @@ public class RegisterNewUserViaApi {
 
         // generate token
         String token = authorizationAPI.generateToken(expectedUsername);
-        boolean authorization = authorizationAPI.isAuthorizedUsername(expectedUsername, 200);
-        Assert.assertTrue(authorization, "User is not authorized, status: " + authorization);
+        boolean authorization = authorizationAPI.isAuthorized(expectedUsername,"Alexgor0!",200);
+        Assert.assertTrue(authorizationAPI.isAuthorized(expectedUsername, "Alexgor0!", 200), "User is not authorized, status : " + authorization);
 
         // get data of created user
         userAPI = new UserAPI(token);
         String actualUsername = userAPI.getUser(userId).jsonPath().getString("username");
-        Assert.assertEquals(actualUsername, expectedUsername, actualUsername + " is not equal " + expectedUsername);
+      //  Assert.assertEquals(authorizationAPI.isAuthorized(expectedUsername, "Alexgor0!", 200), "User is not authorized, status : " + authorization);
+        Assert.assertEquals(actualUsername, expectedUsername, actualUsername + " is not equal to " + expectedUsername);
 
         // delete created user
         userAPI.deleteUser(userId);
