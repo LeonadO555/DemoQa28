@@ -50,7 +50,7 @@ public class CoursesTest extends BaseTest {
     @DisplayName("Работа со сложным списком переход по структуре Xpath")
     public void ListWorkByXpath() throws InterruptedException {
 
-        System.setProperty("webdriver.chrome.driver", "/Users/lynevivan/IdeaProjects/telran/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\VivoBook\\IdeaProjects\\Strata-examples-280233\\chromedriver-win64\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 

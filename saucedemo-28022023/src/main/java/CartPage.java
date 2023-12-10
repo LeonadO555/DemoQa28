@@ -2,14 +2,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 import static java.lang.Double.parseDouble;
 
 public class CartPage extends BasePage{
     public CartPage(WebDriver driver) {
-       super(driver);
+        super(driver);
     }
     @FindBy(className = "cart_item")
     private List<WebElement> items;
@@ -34,7 +37,7 @@ public class CartPage extends BasePage{
     public double getTotalPriceOfAllItems(){
         double total = 0;
         for (WebElement price: itemPrices) {
-           total += parseDouble(price.getText().substring(1));
+            total += parseDouble(price.getText().substring(1));
         }
         return total;
     }
@@ -42,5 +45,15 @@ public class CartPage extends BasePage{
     public void clickOnCheckoutButton(){
         checkoutButton.click();
     }
-}
 
+    public boolean cartIsEmpty(){
+        boolean empty = false;
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+            wait.until(ExpectedConditions.visibilityOf(items.get(0)));
+        } catch (Exception e){
+            empty = true;
+        }
+        return empty;
+    }
+}

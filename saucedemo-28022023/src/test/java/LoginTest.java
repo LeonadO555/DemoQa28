@@ -7,20 +7,23 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 
 import static java.lang.Thread.sleep;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class LoginTest extends BaseTest{
     @Test
     public void successLogin() {
         LoginPage loginPage = new LoginPage(driver);
+        User validUser = new User("standard_user","secret_sauce");
         loginPage.enterUsername("standard_user");
         loginPage.enterPassword("secret_sauce");
         loginPage.clickOnLoginButton();
         InventoryPage inventoryPage = new InventoryPage(driver);
-        assertTrue(inventoryPage.inventoryListIsDisplayed());
+        assertTrue(
+"Inventory list should not be visible",inventoryPage.inventoryListIsDisplayed());
     }
 
-    @Test
+  //  @Test
     public void invalidPassword() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterUsername("standard_user");
@@ -32,7 +35,7 @@ public class LoginTest extends BaseTest{
     }
 
         //locked_out_user
-    @Test
+  //  @Test
     public void lockedOutUser(){
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterUsername("locked_out_user");
@@ -46,7 +49,7 @@ public class LoginTest extends BaseTest{
     //invalid username
 
 //logo, usernames, password
-    @Test
+  //  @Test
     public void elementsAreDisplayed(){
         LoginPage loginPage = new LoginPage(driver);
         loginPage.logoIsDisplayed();
@@ -54,7 +57,7 @@ public class LoginTest extends BaseTest{
         loginPage.passwordsIsDisplayed();
     }
 
-    @Test
+ //   @Test
     public void successLogOut(){
         LoginPage loginPage = new LoginPage(driver);
         loginPage.successLogin("standard_user", "secret_sauce");

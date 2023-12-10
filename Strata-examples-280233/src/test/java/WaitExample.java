@@ -18,7 +18,7 @@ public class WaitExample {
     @Test
     @DisplayName("Варианты ожиданий")
     public void example() {
-        System.setProperty("webdriver.chrome.driver", "/Users/lynevivan/IdeaProjects/telran/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\VivoBook\\IdeaProjects\\Strata-examples-280233\\chromedriver-win64\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 

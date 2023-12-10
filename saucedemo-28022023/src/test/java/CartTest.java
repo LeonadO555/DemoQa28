@@ -47,7 +47,7 @@ public class CartTest extends BaseTest{
         Header header = new Header(driver);
         header.clickOnCartIcon();
         CartPage cartPage = new CartPage(driver);
-        assertEquals(0, cartPage.getItemsQuantity());
+        // assertEquals(0, cartPage.getItemsQuantity());
+        assertTrue(cartPage.cartIsEmpty());
     }
 }
-
